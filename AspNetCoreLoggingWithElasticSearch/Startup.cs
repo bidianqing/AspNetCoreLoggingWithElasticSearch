@@ -21,12 +21,13 @@ namespace AspNetCoreLoggingWithElasticSearch
                //.Enrich.FromLogContext()
                //.Enrich.WithExceptionDetails()
                //.Enrich.WithMachineName()
-               // Instead of configuring the sink directly in code, call ReadFrom.Configuration():
-               .ReadFrom.Configuration(Configuration)
                //.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
                //{
                //    AutoRegisterTemplate = true,
                //})
+
+               // Instead of configuring the sink directly in code, call ReadFrom.Configuration():
+               .ReadFrom.Configuration(Configuration)
             .CreateLogger();
         }
 
