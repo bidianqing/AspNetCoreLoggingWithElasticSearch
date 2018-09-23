@@ -14,7 +14,7 @@ namespace AspNetCoreLoggingWithElasticSearch.Controllers
         }
         public IActionResult Index()
         {
-            _logger.LogDebug("ESTest");
+            _logger.LogInformation("ESTest");
             return View();
         }
 
