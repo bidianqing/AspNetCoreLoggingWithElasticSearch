@@ -7,14 +7,14 @@ namespace AspNetCoreLoggingWithElasticSearch.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger _logger;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
         public IActionResult Index()
         {
-            _logger.LogDebug("ESTest");
+            _logger.LogInformation("ESTest");
             return View();
         }
 

@@ -3,11 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Exceptions;
-using Serilog.Sinks.Elasticsearch;
-using System;
 
 namespace AspNetCoreLoggingWithElasticSearch
 {
@@ -26,7 +22,7 @@ namespace AspNetCoreLoggingWithElasticSearch
                //    AutoRegisterTemplate = true,
                //})
 
-               // Instead of configuring the sink directly in code, call ReadFrom.Configuration():
+               // 使用下面的代码读取配置，而不使用上面注释掉的代码
                .ReadFrom.Configuration(Configuration)
             .CreateLogger();
         }
@@ -40,10 +36,8 @@ namespace AspNetCoreLoggingWithElasticSearch
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddSerilog();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
