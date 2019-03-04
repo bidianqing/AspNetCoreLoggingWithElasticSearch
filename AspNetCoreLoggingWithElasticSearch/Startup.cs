@@ -14,15 +14,6 @@ namespace AspNetCoreLoggingWithElasticSearch
             Configuration = configuration;
 
             Log.Logger = new LoggerConfiguration()
-               //.Enrich.FromLogContext()
-               //.Enrich.WithExceptionDetails()
-               //.Enrich.WithMachineName()
-               //.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
-               //{
-               //    AutoRegisterTemplate = true,
-               //})
-
-               // 使用下面的代码读取配置，而不使用上面注释掉的代码
                .ReadFrom.Configuration(Configuration)
             .CreateLogger();
         }
@@ -32,7 +23,7 @@ namespace AspNetCoreLoggingWithElasticSearch
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
