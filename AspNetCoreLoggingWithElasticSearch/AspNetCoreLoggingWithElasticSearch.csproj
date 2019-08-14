@@ -11,6 +11,4 @@
     <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.0.0" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
-
 </Project>
