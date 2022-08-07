@@ -1,29 +1,26 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System;
 
-namespace AspNetCoreLoggingWithElasticSearch
-{
-    public static class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = WebApplication.CreateBuilder();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging((hostingContext, logging) =>
-                {
-                    logging.ClearProviders();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
 
-                    logging.AddConsole();
-                    logging.AddSerilog();
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+builder.Logging.ClearProviders();
+
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+builder.Logging.AddSerilog(logger);
+builder.Logging.AddConsole();
+
+var app = builder.Build();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
