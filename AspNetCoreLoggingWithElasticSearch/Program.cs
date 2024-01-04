@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -14,7 +15,12 @@ var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 builder.Logging.AddSerilog(logger);
-builder.Logging.AddConsole();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Logging.AddConsole();
+}
+
 
 var app = builder.Build();
 
