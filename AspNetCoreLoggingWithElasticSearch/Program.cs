@@ -6,8 +6,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder();
 
-builder.Services.AddControllers()
-    .AddNewtonsoftJson();
+builder.Services.AddControllers();
 
 builder.Logging.ClearProviders();
 
