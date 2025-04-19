@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using AspNetCoreLoggingWithElasticSearch;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder();
@@ -23,7 +20,7 @@ if (builder.Environment.IsDevelopment())
 
 var app = builder.Build();
 
-app.UseAuthorization();
+app.UseMiddleware<UserContextEnrichmentMiddleware>();
 
 app.MapControllers();
 
